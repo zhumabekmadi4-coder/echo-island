@@ -1,0 +1,15 @@
+{
+  "app_name": "Эхо-остров",
+  "mic_button_speak": "Скажи слово!",
+  "mic_button_listening": "Слушаю...",
+  "mic_button_processing": "Проверяю...",
+  "try_again": "Попробуй ещё раз!",
+  "hint_say": "Скажи:",
+  "hint_means": "Означает:",
+  "welcome_title": "Добро пожаловать на Эхо-остров!",
+  "welcome_subtitle": "Произноси слова — твори магию!",
+  "speech_not_supported": "Твой браузер не поддерживает распознавание речи",
+  "mic_permission_denied": "Разреши доступ к микрофону",
+  "no_speech_detected": "Я тебя не услышал. Попробуй ещё раз!",
+  "scene_complete": "Отлично! Ты справился!"
+}

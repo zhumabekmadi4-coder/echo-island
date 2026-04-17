@@ -1,0 +1,15 @@
+{
+  "app_name": "Эхо-арал",
+  "mic_button_speak": "Сөзді айт!",
+  "mic_button_listening": "Тыңдап жатырмын...",
+  "mic_button_processing": "Тексеруде...",
+  "try_again": "Қайта байқап көр!",
+  "hint_say": "Айт:",
+  "hint_means": "Мағынасы:",
+  "welcome_title": "Эхо-аралға қош келдіңіз!",
+  "welcome_subtitle": "Сөздерді айт — сиқыр жаса!",
+  "speech_not_supported": "Браузеріңіз дыбысты тануды қолдамайды",
+  "mic_permission_denied": "Микрофонға рұқсат беріңіз",
+  "no_speech_detected": "Мен сені естімедім. Қайта байқап көр!",
+  "scene_complete": "Жарайсың! Сен жеңдің!"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "crystal_caves",
+    "name": { "ru": "Хрустальные пещеры", "kk": "Хрусталь үңгірлері" },
+    "description": { "ru": "Тёмные пещеры, полные магии", "kk": "Сиқырға толы қараңғы үңгірлер" },
+    "emoji": "💎",
+    "scenes": ["dragon_frozen", "fish_dry", "owl_dark", "fairy_fog", "fox_lost"],
+    "unlocked": true,
+    "background_gradient": ["#0a0618", "#1a1145", "#2d1b69", "#1a3a5c"],
+    "accent_color": "#a78bfa"
+  },
+  {
+    "id": "enchanted_forest",
+    "name": { "ru": "Волшебный лес", "kk": "Сиқырлы орман" },
+    "description": { "ru": "Древний лес с говорящими деревьями", "kk": "Сөйлейтін ағаштары бар ежелгі орман" },
+    "emoji": "🌲",
+    "scenes": ["cat_sleeping", "puppy_lost", "egg_nest", "bear_hibernate", "rabbit_trapped"],
+    "unlocked": true,
+    "background_gradient": ["#0a1a0a", "#0d2818", "#1a4a2e", "#0d3a20"],
+    "accent_color": "#86efac"
+  },
+  {
+    "id": "star_beach",
+    "name": { "ru": "Звёздный пляж", "kk": "Жұлдызды жағажай" },
+    "description": { "ru": "Берег, где звёзды падают в море", "kk": "Жұлдыздар теңізге түсетін жағалау" },
+    "emoji": "🌊",
+    "scenes": ["turtle_cold", "wolf_howl", "flower_wilted", "tree_dead", "penguin_hot"],
+    "unlocked": true,
+    "background_gradient": ["#0a0e27", "#0f1a3d", "#1a2d5c", "#1a3a5c"],
+    "accent_color": "#38bdf8"
+  }
+]
