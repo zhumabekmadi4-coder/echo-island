@@ -2,14 +2,6 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import islands from '@/content/islands.json'
-import scenes from '@/content/scenes.json'
-
-// Island positions on the map (hand-placed for visual appeal)
-const ISLAND_POSITIONS = [
-  { x: 25, y: 55 },
-  { x: 55, y: 35 },
-  { x: 80, y: 60 },
-]
 
 export function MapPage() {
   const { i18n } = useTranslation()
@@ -17,192 +9,145 @@ export function MapPage() {
   const lang = i18n.language as 'ru' | 'kk'
 
   return (
-    <div className="relative w-full h-full overflow-hidden select-none">
-      {/* Ocean background */}
+    <div className="relative w-full h-full overflow-y-auto overflow-x-hidden select-none">
+      {/* Ocean background — fixed */}
       <div
-        className="absolute inset-0"
+        className="fixed inset-0 -z-10"
         style={{
           background: 'linear-gradient(180deg, #0a0618 0%, #0f1a3d 25%, #1a2d5c 50%, #1e3a5f 75%, #1a3a5c 100%)',
         }}
       />
 
       {/* Stars */}
-      {Array.from({ length: 40 }, (_, i) => (
+      {Array.from({ length: 30 }, (_, i) => (
         <motion.div
           key={`star-${i}`}
-          className="absolute rounded-full bg-white"
+          className="fixed rounded-full bg-white -z-10"
           style={{
-            width: 1 + Math.random() * 2.5,
-            height: 1 + Math.random() * 2.5,
+            width: 1 + Math.random() * 2,
+            height: 1 + Math.random() * 2,
             left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 30}%`,
-            boxShadow: `0 0 ${2 + Math.random() * 4}px rgba(255,255,255,0.5)`,
+            top: `${Math.random() * 40}%`,
+            boxShadow: `0 0 ${2 + Math.random() * 3}px rgba(255,255,255,0.5)`,
           }}
           animate={{ opacity: [0.2, 0.8, 0.2] }}
           transition={{ duration: 2 + Math.random() * 3, delay: Math.random() * 3, repeat: Infinity }}
         />
       ))}
 
-      {/* Ocean waves */}
-      <motion.div
-        className="absolute w-[200%] h-full"
-        style={{
-          top: '40%',
-          background: 'repeating-linear-gradient(90deg, transparent, rgba(56,189,248,0.03) 10%, transparent 20%)',
-        }}
-        animate={{ x: ['-50%', '0%'] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      />
-
-      {/* Title */}
-      <motion.div
-        className="absolute top-6 left-1/2 z-10 text-center"
-        initial={{ y: -30, x: '-50%', opacity: 0 }}
-        animate={{ y: 0, x: '-50%', opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <h1
-          className="text-3xl font-bold text-white"
-          style={{ textShadow: '0 0 20px rgba(167,139,250,0.5), 0 2px 10px rgba(0,0,0,0.5)' }}
+      {/* Content */}
+      <div className="relative z-0 flex flex-col items-center px-5 pt-14 pb-10 min-h-full gap-5">
+        {/* Title */}
+        <motion.div
+          className="text-center mb-2"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
         >
-          {lang === 'kk' ? 'Эхо-арал' : 'Эхо-остров'}
-        </h1>
-        <p className="text-purple-300/50 text-sm mt-1">
-          {lang === 'kk' ? 'Аралды таңда' : 'Выбери остров'}
-        </p>
-      </motion.div>
-
-      {/* Islands */}
-      {islands.map((island, idx) => {
-        const pos = ISLAND_POSITIONS[idx]
-        const completedScenes = island.scenes.filter((sid) => {
-          // TODO: check from Dexie if scene completed
-          return false
-        }).length
-        const totalScenes = island.scenes.length
-        const firstSceneId = island.scenes[0]
-
-        return (
-          <motion.div
-            key={island.id}
-            className="absolute cursor-pointer"
-            style={{
-              left: `${pos.x}%`,
-              top: `${pos.y}%`,
-              transform: 'translate(-50%, -50%)',
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.5 + idx * 0.2, type: 'spring', stiffness: 200 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate(`/island/${island.id}/scene/${firstSceneId}`)}
+          <h1
+            className="text-2xl font-bold text-white"
+            style={{ textShadow: '0 0 20px rgba(167,139,250,0.5), 0 2px 10px rgba(0,0,0,0.5)' }}
           >
-            {/* Island base glow */}
-            <motion.div
-              className="absolute rounded-full"
-              style={{
-                width: 180,
-                height: 180,
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                background: `radial-gradient(circle, ${island.accent_color}22 0%, transparent 70%)`,
-              }}
-              animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
-              transition={{ repeat: Infinity, duration: 3 + idx, ease: 'easeInOut' }}
-            />
+            {lang === 'kk' ? 'Эхо-арал' : 'Эхо-остров'}
+          </h1>
+          <p className="text-purple-300/50 text-sm mt-1">
+            {lang === 'kk' ? 'Аралды таңда' : 'Выбери остров'}
+          </p>
+        </motion.div>
 
-            {/* Island shape */}
-            <div className="relative flex flex-col items-center">
-              {/* Island body */}
+        {/* Island cards */}
+        {islands.map((island, idx) => {
+          const totalScenes = island.scenes.length
+          const firstSceneId = island.scenes[0]
+
+          return (
+            <motion.div
+              key={island.id}
+              className="w-full max-w-sm cursor-pointer"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 + idx * 0.15, type: 'spring', stiffness: 150 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate(`/island/${island.id}/scene/${firstSceneId}`)}
+            >
               <div
-                className="relative w-28 h-20 rounded-[50%] flex items-center justify-center"
+                className="relative rounded-2xl p-4 flex items-center gap-4 overflow-hidden"
                 style={{
-                  background: `linear-gradient(180deg, ${island.background_gradient[2]} 0%, ${island.background_gradient[3]} 100%)`,
-                  boxShadow: `0 8px 25px rgba(0,0,0,0.4), 0 0 20px ${island.accent_color}33`,
-                  border: `2px solid ${island.accent_color}44`,
+                  background: `linear-gradient(135deg, ${island.background_gradient[1]}cc, ${island.background_gradient[2]}cc)`,
+                  border: `1px solid ${island.accent_color}44`,
+                  boxShadow: `0 0 25px ${island.accent_color}15, 0 8px 20px rgba(0,0,0,0.3)`,
+                  backdropFilter: 'blur(8px)',
                 }}
               >
-                <span className="text-4xl" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}>
-                  {island.emoji}
-                </span>
-
-                {/* Progress ring */}
+                {/* Island emoji */}
                 <div
-                  className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                  className="shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center"
                   style={{
-                    background: `linear-gradient(135deg, ${island.accent_color}, ${island.accent_color}cc)`,
-                    color: 'white',
-                    boxShadow: `0 0 8px ${island.accent_color}66`,
+                    background: `linear-gradient(135deg, ${island.background_gradient[2]}, ${island.background_gradient[3]})`,
+                    border: `1px solid ${island.accent_color}55`,
+                    boxShadow: `0 0 15px ${island.accent_color}22`,
                   }}
                 >
-                  {completedScenes}/{totalScenes}
+                  <span className="text-3xl">{island.emoji}</span>
                 </div>
+
+                {/* Text */}
+                <div className="flex-1 min-w-0">
+                  <h2
+                    className="text-base font-bold text-white leading-tight"
+                    style={{ textShadow: `0 0 10px ${island.accent_color}44` }}
+                  >
+                    {island.name[lang] || island.name.ru}
+                  </h2>
+                  <p className="text-xs text-white/40 mt-0.5 leading-snug">
+                    {island.description[lang] || island.description.ru}
+                  </p>
+                  {/* Progress bar */}
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ background: island.accent_color }}
+                        initial={{ width: 0 }}
+                        animate={{ width: '0%' }}
+                        transition={{ delay: 0.5 + idx * 0.2, duration: 0.8 }}
+                      />
+                    </div>
+                    <span className="text-xs text-white/40 font-medium">0/{totalScenes}</span>
+                  </div>
+                </div>
+
+                {/* Arrow */}
+                <div className="shrink-0 text-white/30">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </div>
+
+                {/* Subtle glow */}
+                <motion.div
+                  className="absolute -right-8 -top-8 w-24 h-24 rounded-full"
+                  style={{ background: `radial-gradient(circle, ${island.accent_color}15, transparent)` }}
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                  transition={{ repeat: Infinity, duration: 3 + idx }}
+                />
               </div>
-
-              {/* Island name */}
-              <div
-                className="mt-2 px-3 py-1 rounded-lg text-center"
-                style={{
-                  background: 'rgba(0,0,0,0.4)',
-                  backdropFilter: 'blur(8px)',
-                  border: `1px solid ${island.accent_color}33`,
-                }}
-              >
-                <p
-                  className="text-sm font-semibold text-white whitespace-nowrap"
-                  style={{ textShadow: `0 0 8px ${island.accent_color}55` }}
-                >
-                  {island.name[lang] || island.name.ru}
-                </p>
-                <p className="text-xs text-white/40">
-                  {island.description[lang] || island.description.ru}
-                </p>
-              </div>
-
-              {/* Water ripple under island */}
-              <motion.div
-                className="absolute -bottom-3 rounded-full"
-                style={{
-                  width: '120%',
-                  height: 12,
-                  background: `radial-gradient(ellipse, ${island.accent_color}15, transparent)`,
-                }}
-                animate={{ scaleX: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ repeat: Infinity, duration: 2 + idx * 0.5 }}
-              />
-            </div>
-          </motion.div>
-        )
-      })}
-
-      {/* Connecting paths between islands */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ opacity: 0.15 }}>
-        <motion.line
-          x1="25%" y1="55%" x2="55%" y2="35%"
-          stroke="#a78bfa" strokeWidth="2" strokeDasharray="8 4"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
-          transition={{ duration: 2, delay: 1 }}
-        />
-        <motion.line
-          x1="55%" y1="35%" x2="80%" y2="60%"
-          stroke="#a78bfa" strokeWidth="2" strokeDasharray="8 4"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
-          transition={{ duration: 2, delay: 1.5 }}
-        />
-      </svg>
+            </motion.div>
+          )
+        })}
+      </div>
 
       {/* Language switcher */}
-      <div className="absolute top-4 right-4 z-10 flex gap-1">
+      <div className="fixed top-3 right-3 z-20 flex gap-1">
         {(['ru', 'kk'] as const).map((code) => (
           <button
             key={code}
             onClick={() => i18n.changeLanguage(code)}
-            className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer"
+            className="px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer"
             style={{
               color: lang === code ? 'white' : 'rgba(255,255,255,0.35)',
-              background: lang === code ? 'rgba(167,139,250,0.2)' : 'transparent',
+              background: lang === code ? 'rgba(167,139,250,0.25)' : 'transparent',
               border: lang === code ? '1px solid rgba(167,139,250,0.3)' : '1px solid transparent',
             }}
           >

@@ -29,7 +29,7 @@ export function SuccessMessage({ show, text }: SuccessMessageProps) {
 
           {/* Banner */}
           <div
-            className="relative px-10 py-5 rounded-2xl text-2xl font-bold text-center text-white"
+            className="relative px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-lg sm:text-2xl font-bold text-center text-white max-w-[85vw]"
             style={{
               background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #dc2626 100%)',
               boxShadow: '0 0 30px rgba(245,158,11,0.4), 0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)',

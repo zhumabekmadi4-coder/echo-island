@@ -148,13 +148,13 @@ export function Game() {
       <AnimatePresence>
         {gameState !== 'success' && (
           <motion.div
-            className="absolute top-6 left-1/2 z-10"
+            className="absolute top-12 left-1/2 z-10 w-[85%] max-w-xs"
             initial={{ y: -20, x: '-50%', opacity: 0 }}
             animate={{ y: 0, x: '-50%', opacity: 1 }}
             exit={{ y: -20, x: '-50%', opacity: 0 }}
           >
             <div
-              className="relative rounded-2xl px-8 py-4 text-center overflow-hidden"
+              className="relative rounded-2xl px-6 py-3 text-center overflow-hidden"
               style={{
                 background: 'rgba(15,10,40,0.6)',
                 backdropFilter: 'blur(12px)',
@@ -164,7 +164,7 @@ export function Game() {
             >
               <p className="text-purple-300/70 text-sm font-medium">{t('hint_say')}</p>
               <p
-                className="text-white text-4xl font-bold mt-1 tracking-wide"
+                className="text-white text-3xl sm:text-4xl font-bold mt-1 tracking-wide"
                 style={{ textShadow: `0 0 20px ${island?.accent_color ?? '#a78bfa'}66` }}
               >
                 {scene.hint_emoji} {word.en}
