@@ -3,16 +3,11 @@
     "id": "dragon_frozen",
     "island_id": "crystal_caves",
     "background": "cave_icy",
-    "character": {
-      "id": "dragon_red",
-      "type": "dragon",
-      "state_before": "frozen",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 38 }
-    },
+    "character": { "id": "dragon_red", "type": "dragon", "state_before": "frozen", "state_after": "happy", "position": { "x": 55, "y": 38 } },
     "trigger_word_id": "fire",
     "success_animation": "fire",
     "success_text": { "ru": "Дракончик спасён!", "kk": "Айдаһар құтқарылды!" },
+    "echo_intro": { "ru": "Дракончик замёрз! Скажи \"fire\" 🔥", "kk": "Айдаһар тоңып қалды! \"fire\" деп айт 🔥" },
     "hint_emoji": "🔥",
     "next_scene_id": "fish_dry"
   },
@@ -20,16 +15,11 @@
     "id": "fish_dry",
     "island_id": "crystal_caves",
     "background": "cave_dry",
-    "character": {
-      "id": "fish_blue",
-      "type": "fish",
-      "state_before": "sad",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 45 }
-    },
+    "character": { "id": "fish_blue", "type": "fish", "state_before": "sad", "state_after": "happy", "position": { "x": 50, "y": 45 } },
     "trigger_word_id": "water",
     "success_animation": "water",
     "success_text": { "ru": "Рыбка плавает!", "kk": "Балық жүзіп жүр!" },
+    "echo_intro": { "ru": "Рыбке нужна вода! Скажи \"water\" 💧", "kk": "Балыққа су керек! \"water\" деп айт 💧" },
     "hint_emoji": "💧",
     "next_scene_id": "owl_dark"
   },
@@ -37,16 +27,11 @@
     "id": "owl_dark",
     "island_id": "crystal_caves",
     "background": "cave_dark",
-    "character": {
-      "id": "owl_gold",
-      "type": "owl",
-      "state_before": "sleeping",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 35 }
-    },
+    "character": { "id": "owl_gold", "type": "owl", "state_before": "sleeping", "state_after": "happy", "position": { "x": 55, "y": 35 } },
     "trigger_word_id": "light",
     "success_animation": "light",
     "success_text": { "ru": "Совёнок проснулся!", "kk": "Жапалақ оянды!" },
+    "echo_intro": { "ru": "В пещере темно! Скажи \"light\" 💡", "kk": "Үңгір қараңғы! \"light\" деп айт 💡" },
     "hint_emoji": "💡",
     "next_scene_id": "fairy_fog"
   },
@@ -54,16 +39,11 @@
     "id": "fairy_fog",
     "island_id": "crystal_caves",
     "background": "cave_foggy",
-    "character": {
-      "id": "fairy_green",
-      "type": "fairy",
-      "state_before": "hidden",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 40 }
-    },
+    "character": { "id": "fairy_green", "type": "fairy", "state_before": "hidden", "state_after": "happy", "position": { "x": 50, "y": 40 } },
     "trigger_word_id": "wind",
     "success_animation": "wind",
     "success_text": { "ru": "Фея найдена!", "kk": "Пері табылды!" },
+    "echo_intro": { "ru": "Фея спряталась в тумане! Скажи \"wind\" 🌬️", "kk": "Пері тұман ішінде! \"wind\" деп айт 🌬️" },
     "hint_emoji": "🌬️",
     "next_scene_id": "fox_lost"
   },
@@ -71,16 +51,11 @@
     "id": "fox_lost",
     "island_id": "crystal_caves",
     "background": "cave_exit",
-    "character": {
-      "id": "fox_silver",
-      "type": "fox",
-      "state_before": "lost",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 42 }
-    },
+    "character": { "id": "fox_silver", "type": "fox", "state_before": "lost", "state_after": "happy", "position": { "x": 55, "y": 42 } },
     "trigger_word_id": "star",
     "success_animation": "light",
     "success_text": { "ru": "Лисёнок нашёл путь!", "kk": "Түлкі жолын тапты!" },
+    "echo_intro": { "ru": "Лисёнок потерялся! Скажи \"star\" ⭐", "kk": "Түлкі адасып қалды! \"star\" деп айт ⭐" },
     "hint_emoji": "⭐",
     "next_scene_id": null
   },
@@ -88,16 +63,11 @@
     "id": "cat_sleeping",
     "island_id": "enchanted_forest",
     "background": "forest_tree",
-    "character": {
-      "id": "cat_purple",
-      "type": "cat",
-      "state_before": "sleeping",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 38 }
-    },
+    "character": { "id": "cat_purple", "type": "cat", "state_before": "sleeping", "state_after": "happy", "position": { "x": 55, "y": 38 } },
     "trigger_word_id": "cat",
     "success_animation": "sparkle",
     "success_text": { "ru": "Котёнок мурлычет!", "kk": "Мысық мырылдайды!" },
+    "echo_intro": { "ru": "Котёнок спит на дереве! Позови — скажи \"cat\" 🐱", "kk": "Мысық ағашта ұйықтап тұр! Шақыр — \"cat\" деп айт 🐱" },
     "hint_emoji": "🐱",
     "next_scene_id": "puppy_lost"
   },
@@ -105,16 +75,11 @@
     "id": "puppy_lost",
     "island_id": "enchanted_forest",
     "background": "forest_path",
-    "character": {
-      "id": "dog_golden",
-      "type": "dog",
-      "state_before": "lost",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 45 }
-    },
+    "character": { "id": "dog_golden", "type": "dog", "state_before": "lost", "state_after": "happy", "position": { "x": 50, "y": 45 } },
     "trigger_word_id": "dog",
     "success_animation": "sparkle",
     "success_text": { "ru": "Щенок нашёлся!", "kk": "Күшік табылды!" },
+    "echo_intro": { "ru": "Щенок заблудился! Позови — скажи \"dog\" 🐶", "kk": "Күшік жоғалып қалды! Шақыр — \"dog\" деп айт 🐶" },
     "hint_emoji": "🐶",
     "next_scene_id": "egg_nest"
   },
@@ -122,16 +87,11 @@
     "id": "egg_nest",
     "island_id": "enchanted_forest",
     "background": "forest_canopy",
-    "character": {
-      "id": "bird_blue",
-      "type": "bird",
-      "state_before": "egg",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 35 }
-    },
+    "character": { "id": "bird_blue", "type": "bird", "state_before": "egg", "state_after": "happy", "position": { "x": 55, "y": 35 } },
     "trigger_word_id": "bird",
     "success_animation": "wind",
     "success_text": { "ru": "Птенчик вылупился!", "kk": "Балапан жарылды!" },
+    "echo_intro": { "ru": "В гнезде яйцо! Помоги птенцу — скажи \"bird\" 🐣", "kk": "Ұяда жұмыртқа бар! Балапанға көмектес — \"bird\" деп айт 🐣" },
     "hint_emoji": "🐣",
     "next_scene_id": "bear_hibernate"
   },
@@ -139,16 +99,11 @@
     "id": "bear_hibernate",
     "island_id": "enchanted_forest",
     "background": "forest_den",
-    "character": {
-      "id": "bear_brown",
-      "type": "bear",
-      "state_before": "sleeping",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 42 }
-    },
+    "character": { "id": "bear_brown", "type": "bear", "state_before": "sleeping", "state_after": "happy", "position": { "x": 50, "y": 42 } },
     "trigger_word_id": "bear",
     "success_animation": "fire",
     "success_text": { "ru": "Мишка проснулся!", "kk": "Аю оянды!" },
+    "echo_intro": { "ru": "Мишка спит в берлоге! Позови — скажи \"bear\" 🐻", "kk": "Аю үңгірде ұйықтап тұр! Шақыр — \"bear\" деп айт 🐻" },
     "hint_emoji": "🐻",
     "next_scene_id": "rabbit_trapped"
   },
@@ -156,16 +111,11 @@
     "id": "rabbit_trapped",
     "island_id": "enchanted_forest",
     "background": "forest_clearing",
-    "character": {
-      "id": "rabbit_white",
-      "type": "rabbit",
-      "state_before": "trapped",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 45 }
-    },
+    "character": { "id": "rabbit_white", "type": "rabbit", "state_before": "trapped", "state_after": "happy", "position": { "x": 55, "y": 45 } },
     "trigger_word_id": "rabbit",
     "success_animation": "sparkle",
     "success_text": { "ru": "Зайчик свободен!", "kk": "Қоян бос!" },
+    "echo_intro": { "ru": "Зайчик попал в ловушку! Скажи \"rabbit\" 🐰", "kk": "Қоян қақпанға түсіп қалды! \"rabbit\" деп айт 🐰" },
     "hint_emoji": "🐰",
     "next_scene_id": null
   },
@@ -173,16 +123,11 @@
     "id": "turtle_cold",
     "island_id": "star_beach",
     "background": "beach_night",
-    "character": {
-      "id": "turtle_green",
-      "type": "turtle",
-      "state_before": "cold",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 48 }
-    },
+    "character": { "id": "turtle_green", "type": "turtle", "state_before": "cold", "state_after": "happy", "position": { "x": 50, "y": 48 } },
     "trigger_word_id": "sun",
     "success_animation": "fire",
     "success_text": { "ru": "Черепашке тепло!", "kk": "Тасбақаға жылы!" },
+    "echo_intro": { "ru": "Черепашке холодно ночью! Скажи \"sun\" ☀️", "kk": "Тасбақа түнде тоңып тұр! \"sun\" деп айт ☀️" },
     "hint_emoji": "☀️",
     "next_scene_id": "wolf_howl"
   },
@@ -190,16 +135,11 @@
     "id": "wolf_howl",
     "island_id": "star_beach",
     "background": "beach_cliff",
-    "character": {
-      "id": "wolf_grey",
-      "type": "wolf",
-      "state_before": "lonely",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 38 }
-    },
+    "character": { "id": "wolf_grey", "type": "wolf", "state_before": "lonely", "state_after": "happy", "position": { "x": 55, "y": 38 } },
     "trigger_word_id": "moon",
     "success_animation": "light",
     "success_text": { "ru": "Волчонок воет на луну!", "kk": "Бөлтірік айға ұлиды!" },
+    "echo_intro": { "ru": "Волчонку одиноко! Позови — скажи \"moon\" 🌙", "kk": "Бөлтірік жалғыз! Шақыр — \"moon\" деп айт 🌙" },
     "hint_emoji": "🌙",
     "next_scene_id": "flower_wilted"
   },
@@ -207,16 +147,11 @@
     "id": "flower_wilted",
     "island_id": "star_beach",
     "background": "beach_garden",
-    "character": {
-      "id": "flower_fairy",
-      "type": "fairy",
-      "state_before": "sad",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 42 }
-    },
+    "character": { "id": "flower_fairy", "type": "fairy", "state_before": "sad", "state_after": "happy", "position": { "x": 50, "y": 42 } },
     "trigger_word_id": "rain",
     "success_animation": "water",
     "success_text": { "ru": "Цветы расцвели!", "kk": "Гүлдер гүлдеді!" },
+    "echo_intro": { "ru": "Цветы засохли! Скажи \"rain\" 🌧️", "kk": "Гүлдер қурап қалды! \"rain\" деп айт 🌧️" },
     "hint_emoji": "🌧️",
     "next_scene_id": "tree_dead"
   },
@@ -224,16 +159,11 @@
     "id": "tree_dead",
     "island_id": "star_beach",
     "background": "beach_hill",
-    "character": {
-      "id": "tree_spirit",
-      "type": "tree_spirit",
-      "state_before": "withered",
-      "state_after": "happy",
-      "position": { "x": 50, "y": 38 }
-    },
+    "character": { "id": "tree_spirit", "type": "tree_spirit", "state_before": "withered", "state_after": "happy", "position": { "x": 50, "y": 38 } },
     "trigger_word_id": "tree",
     "success_animation": "sparkle",
     "success_text": { "ru": "Дерево ожило!", "kk": "Ағаш тірілді!" },
+    "echo_intro": { "ru": "Дерево увяло! Скажи \"tree\" 🌳", "kk": "Ағаш қурап қалды! \"tree\" деп айт 🌳" },
     "hint_emoji": "🌳",
     "next_scene_id": "penguin_hot"
   },
@@ -241,16 +171,11 @@
     "id": "penguin_hot",
     "island_id": "star_beach",
     "background": "beach_tropical",
-    "character": {
-      "id": "penguin_blue",
-      "type": "penguin",
-      "state_before": "hot",
-      "state_after": "happy",
-      "position": { "x": 55, "y": 45 }
-    },
+    "character": { "id": "penguin_blue", "type": "penguin", "state_before": "hot", "state_after": "happy", "position": { "x": 55, "y": 45 } },
     "trigger_word_id": "snow",
     "success_animation": "ice",
     "success_text": { "ru": "Пингвинёнку прохладно!", "kk": "Пингвинге салқын!" },
+    "echo_intro": { "ru": "Пингвинёнку жарко! Скажи \"snow\" ❄️", "kk": "Пингвинге ыстық! \"snow\" деп айт ❄️" },
     "hint_emoji": "❄️",
     "next_scene_id": null
   }
