@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,6 +9,8 @@ import { SuccessMessage } from '@/components/SuccessMessage'
 import { AmbientParticles } from '@/components/AmbientParticles'
 import { recognizeSpeech, checkWord, isSpeechSupported } from '@/engine/SpeechEngine'
 import { logAttempt } from '@/db/telemetry'
+import { useEcho } from '@/hooks/useEcho'
+import echoLines from '@/content/echo_lines.json'
 import scenes from '@/content/scenes.json'
 import words from '@/content/words.json'
 import islands from '@/content/islands.json'
@@ -46,6 +48,19 @@ export function Game() {
   const island = useMemo(() => islands.find((i) => i.id === scene.island_id), [scene])
   const lang = i18n.language as 'ru' | 'kk'
   const bg = BG_CONFIGS[scene.island_id] ?? BG_CONFIGS.crystal_caves
+
+  const echo = useEcho()
+
+  useEffect(() => {
+    const intro = (scene as { echo_intro?: { ru: string; kk: string } }).echo_intro
+    if (!intro) return
+    echo.setAnchor({ mode: 'scene', x: scene.character.position.x - 20, y: scene.character.position.y + 15 })
+    echo.speak({ ru: intro.ru, kk: intro.kk, en: word.en }, { mood: 'talking', duration: 4500 }).then(() => {
+      echo.setAnchor({ mode: 'corner' })
+      echo.setMood('idle')
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scene.id])
 
   const handleMicPress = useCallback(async () => {
     if (!isSpeechSupported()) {
