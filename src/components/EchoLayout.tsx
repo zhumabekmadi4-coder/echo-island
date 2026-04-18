@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { db } from '@/db/schema'
 import { computePower, isPowerLevelUp, type Power } from '@/engine/EchoProgress'
 import {
@@ -22,10 +22,11 @@ import echoLines from '@/content/echo_lines.json'
 export function EchoLayout({ children }: { children: ReactNode }) {
   const { i18n, t } = useTranslation()
   const location = useLocation()
+  const navigate = useNavigate()
   const lang = i18n.language as 'ru' | 'kk'
 
-  const scenesCompleted = useLiveQuery(() => db.sceneProgress.count(), [], 0)
-  const prevCountRef = useRef(scenesCompleted)
+  const scenesCompleted = useLiveQuery(() => db.sceneProgress.count(), [])
+  const prevCountRef = useRef<number | undefined>(undefined)
   const power: Power = useMemo(() => computePower(scenesCompleted ?? 0), [scenesCompleted])
 
   const [mood, setMood] = useState<Mood>('idle')
@@ -34,23 +35,40 @@ export function EchoLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [levelUpFlash, setLevelUpFlash] = useState<Power | null>(null)
   const bubbleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const prevPathRef = useRef<string | null>(null)
+  const moodRef = useRef<Mood>('idle')
 
   useEffect(() => {
+    const isInitialMount = prevPathRef.current === null
+    prevPathRef.current = location.pathname
+
+    // Anchor always updates per route (initial and subsequent)
     setAnchor({ mode: location.pathname === '/talk' ? 'center-top' : 'corner' })
-    setMood('idle')
-    setBubbleText(null)
     setMenuOpen(false)
+
+    // Only reset mood/bubble on actual navigation, NOT the initial mount
+    // (so child pages' mount effects that set mood/speak() are preserved)
+    if (!isInitialMount) {
+      setMood('idle')
+      setBubbleText(null)
+    }
   }, [location.pathname])
 
   useEffect(() => {
-    const prev = prevCountRef.current ?? 0
-    const curr = scenesCompleted ?? 0
-    if (curr > prev && isPowerLevelUp(prev, curr)) {
-      setLevelUpFlash(computePower(curr))
+    if (scenesCompleted === undefined) return
+    const prev = prevCountRef.current
+    prevCountRef.current = scenesCompleted
+    if (prev === undefined) return  // first real resolution, no comparison
+    if (scenesCompleted > prev && isPowerLevelUp(prev, scenesCompleted)) {
+      setLevelUpFlash(computePower(scenesCompleted))
       setTimeout(() => setLevelUpFlash(null), 1500)
     }
-    prevCountRef.current = curr
   }, [scenesCompleted])
+
+  // Keep moodRef in sync so speak's setTimeout restores the current mood
+  useEffect(() => {
+    moodRef.current = mood
+  }, [mood])
 
   // First-visit greeting
   useEffect(() => {
@@ -83,7 +101,7 @@ export function EchoLayout({ children }: { children: ReactNode }) {
       primeSpeechSynthesis()
       clearBubbleTimer()
       const text = input[lang] ?? input.ru
-      const prevMood = mood
+      const prevMood = moodRef.current
       setBubbleText(text)
       setMood(opts?.mood ?? 'talking')
 
@@ -96,7 +114,7 @@ export function EchoLayout({ children }: { children: ReactNode }) {
         setMood(prevMood)
       }, duration)
     },
-    [lang, mood]
+    [lang]
   )
 
   const menuSuppressed =
@@ -138,8 +156,7 @@ export function EchoLayout({ children }: { children: ReactNode }) {
         <EchoMenu
           onNavigate={(path) => {
             setMenuOpen(false)
-            window.history.pushState({}, '', path)
-            window.dispatchEvent(new PopStateEvent('popstate'))
+            navigate(path)
           }}
           onClose={() => setMenuOpen(false)}
           labels={{
