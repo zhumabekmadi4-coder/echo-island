@@ -111,6 +111,12 @@ export function Game() {
       } else {
         setGameState('fail')
         setErrorMessage(t('try_again'))
+        echo.setAnchor({ mode: 'scene', x: scene.character.position.x - 20, y: scene.character.position.y + 15 })
+        await echo.speak(
+          { ru: echoLines.retry_hint.ru, kk: echoLines.retry_hint.kk, en: word.en },
+          { mood: 'talking', duration: 3500 }
+        )
+        echo.setAnchor({ mode: 'corner' })
         setTimeout(() => setGameState('idle'), 2000)
       }
     } catch (err) {
