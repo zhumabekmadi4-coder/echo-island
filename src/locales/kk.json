@@ -1,15 +1,38 @@
 {
   "app_name": "Эхо-арал",
   "mic_button_speak": "Сөзді айт!",
-  "mic_button_listening": "Тыңдап жатырмын...",
-  "mic_button_processing": "Тексеруде...",
-  "try_again": "Қайта байқап көр!",
+  "mic_button_listening": "Тыңдап тұрмын...",
+  "mic_button_processing": "Тексеріп жатырмын...",
+  "try_again": "Қайталап көр!",
   "hint_say": "Айт:",
   "hint_means": "Мағынасы:",
-  "welcome_title": "Эхо-аралға қош келдіңіз!",
+  "welcome_title": "Эхо-аралға қош келдің!",
   "welcome_subtitle": "Сөздерді айт — сиқыр жаса!",
-  "speech_not_supported": "Браузеріңіз дыбысты тануды қолдамайды",
-  "mic_permission_denied": "Микрофонға рұқсат беріңіз",
-  "no_speech_detected": "Мен сені естімедім. Қайта байқап көр!",
-  "scene_complete": "Жарайсың! Сен жеңдің!"
+  "speech_not_supported": "Браузер сөзді танымайды",
+  "mic_permission_denied": "Микрофонға рұқсат бер",
+  "no_speech_detected": "Естімедім. Қайталап көр!",
+  "scene_complete": "Жарайсың! Сен жасадың!",
+
+  "echo_menu_talk": "Сөйлесейік",
+  "echo_menu_spellbook": "Сиқыр кітабы",
+  "echo_menu_close": "Жабу",
+  "echo_level_up_banner": "Эхо жарқырап кетті!",
+
+  "spellbook_title": "Сиқыр кітабы",
+  "spellbook_progress": "{{learned}} / {{total}} жатталды",
+  "spellbook_tab_magic_elements": "Сиқыр",
+  "spellbook_tab_animals": "Жануарлар",
+  "spellbook_tab_sky": "Аспан",
+  "spellbook_listen": "Тыңда",
+  "spellbook_pronounce": "Айт",
+  "spellbook_return_to_scene": "Аралға қайт",
+
+  "talk_title": "Жаттығайық!",
+  "talk_session_next": "Келесі сөз",
+  "talk_session_done_button_again": "Тағы да",
+  "talk_session_done_button_map": "Картаға",
+  "talk_hint_show": "Нұсқау",
+
+  "nav_back_to_map": "Картаға",
+  "locked_tooltip_prefix": "Алдымен аралдан тап"
 }

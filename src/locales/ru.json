@@ -11,5 +11,28 @@
   "speech_not_supported": "Твой браузер не поддерживает распознавание речи",
   "mic_permission_denied": "Разреши доступ к микрофону",
   "no_speech_detected": "Я тебя не услышал. Попробуй ещё раз!",
-  "scene_complete": "Отлично! Ты справился!"
+  "scene_complete": "Отлично! Ты справился!",
+
+  "echo_menu_talk": "Поговорить",
+  "echo_menu_spellbook": "Книга заклинаний",
+  "echo_menu_close": "Закрыть",
+  "echo_level_up_banner": "Эхо разгорелся ярче!",
+
+  "spellbook_title": "Книга заклинаний",
+  "spellbook_progress": "{{learned}} из {{total}} выучено",
+  "spellbook_tab_magic_elements": "Магия",
+  "spellbook_tab_animals": "Животные",
+  "spellbook_tab_sky": "Небо",
+  "spellbook_listen": "Послушать",
+  "spellbook_pronounce": "Произнести",
+  "spellbook_return_to_scene": "Вернуться на остров",
+
+  "talk_title": "Потренируемся!",
+  "talk_session_next": "Следующее слово",
+  "talk_session_done_button_again": "Ещё раз",
+  "talk_session_done_button_map": "К карте",
+  "talk_hint_show": "Подсказка",
+
+  "nav_back_to_map": "К карте",
+  "locked_tooltip_prefix": "Сначала найди это на острове"
 }
