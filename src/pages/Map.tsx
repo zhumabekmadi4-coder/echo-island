@@ -1,12 +1,27 @@
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import islands from '@/content/islands.json'
+import scenes from '@/content/scenes.json'
+import { useSceneProgress } from '@/hooks/useSceneProgress'
 
 export function MapPage() {
   const { i18n } = useTranslation()
   const navigate = useNavigate()
   const lang = i18n.language as 'ru' | 'kk'
+
+  const { completed } = useSceneProgress()
+
+  const completedByIsland = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const s of scenes) {
+      if (completed.has(s.id)) {
+        map[s.island_id] = (map[s.island_id] ?? 0) + 1
+      }
+    }
+    return map
+  }, [completed])
 
   return (
     <div className="relative w-full h-full overflow-y-auto overflow-x-hidden select-none">
@@ -110,11 +125,13 @@ export function MapPage() {
                         className="h-full rounded-full"
                         style={{ background: island.accent_color }}
                         initial={{ width: 0 }}
-                        animate={{ width: '0%' }}
+                        animate={{ width: `${((completedByIsland[island.id] ?? 0) / totalScenes) * 100}%` }}
                         transition={{ delay: 0.5 + idx * 0.2, duration: 0.8 }}
                       />
                     </div>
-                    <span className="text-xs text-white/40 font-medium">0/{totalScenes}</span>
+                    <span className="text-xs text-white/40 font-medium">
+                      {completedByIsland[island.id] ?? 0}/{totalScenes}
+                    </span>
                   </div>
                 </div>
 
