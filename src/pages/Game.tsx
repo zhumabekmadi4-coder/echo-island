@@ -51,6 +51,10 @@ export function Game() {
 
   const echo = useEcho()
 
+  const [micPressed, setMicPressed] = useState(false)
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const hintShownRef = useRef(false)
+
   useEffect(() => {
     const intro = (scene as { echo_intro?: { ru: string; kk: string } }).echo_intro
     if (!intro) return
@@ -62,7 +66,32 @@ export function Game() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scene.id])
 
+  useEffect(() => {
+    setMicPressed(false)
+    hintShownRef.current = false
+
+    idleTimerRef.current = setTimeout(() => {
+      if (!micPressed && !hintShownRef.current && gameState === 'idle') {
+        const intro = (scene as { echo_intro?: { ru: string; kk: string } }).echo_intro
+        if (!intro) return
+        hintShownRef.current = true
+        echo.setAnchor({ mode: 'scene', x: scene.character.position.x - 20, y: scene.character.position.y + 15 })
+        echo.speak({ ru: intro.ru, kk: intro.kk, en: word.en }, { mood: 'talking', duration: 4500 }).then(() => {
+          echo.setAnchor({ mode: 'corner' })
+        })
+      }
+    }, 10_000)
+
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scene.id])
+
   const handleMicPress = useCallback(async () => {
+    setMicPressed(true)
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+
     if (!isSpeechSupported()) {
       setErrorMessage(t('speech_not_supported'))
       return
