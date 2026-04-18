@@ -9,6 +9,8 @@ import { SuccessMessage } from '@/components/SuccessMessage'
 import { AmbientParticles } from '@/components/AmbientParticles'
 import { recognizeSpeech, checkWord, isSpeechSupported } from '@/engine/SpeechEngine'
 import { logAttempt } from '@/db/telemetry'
+import { db } from '@/db/schema'
+import { ensureWordProgress } from '@/engine/SpacedRepetition'
 import { useEcho } from '@/hooks/useEcho'
 import echoLines from '@/content/echo_lines.json'
 import scenes from '@/content/scenes.json'
@@ -108,6 +110,15 @@ export function Game() {
 
       if (isCorrect) {
         setGameState('success')
+        await db.sceneProgress.put({ sceneId: scene.id, completedAt: new Date() })
+        await ensureWordProgress(word.id)
+
+        echo.setAnchor({ mode: 'scene', x: scene.character.position.x + 15, y: scene.character.position.y - 10 })
+        echo.setMood('celebrating')
+        setTimeout(() => {
+          echo.setAnchor({ mode: 'corner' })
+          echo.setMood('idle')
+        }, 2500)
       } else {
         setGameState('fail')
         setErrorMessage(t('try_again'))
