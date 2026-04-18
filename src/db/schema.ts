@@ -17,12 +17,32 @@ export interface TelemetryEntry {
   recognizedText: string
 }
 
+export interface SceneProgress {
+  sceneId: string
+  completedAt: Date
+}
+
+export interface AppStateEntry {
+  key: string
+  value: unknown
+  updatedAt: Date
+}
+
 export const db = new Dexie('EchoIslandDB') as Dexie & {
   wordProgress: EntityTable<WordProgress, 'wordId'>
   telemetry: EntityTable<TelemetryEntry, 'id'>
+  sceneProgress: EntityTable<SceneProgress, 'sceneId'>
+  appState: EntityTable<AppStateEntry, 'key'>
 }
 
 db.version(1).stores({
   wordProgress: 'wordId, nextReview, learned',
   telemetry: '++id, wordId, timestamp',
+})
+
+db.version(2).stores({
+  wordProgress: 'wordId, nextReview, learned',
+  telemetry: '++id, wordId, timestamp',
+  sceneProgress: 'sceneId, completedAt',
+  appState: 'key',
 })
