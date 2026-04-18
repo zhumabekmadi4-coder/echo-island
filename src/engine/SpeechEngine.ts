@@ -71,3 +71,42 @@ export function checkWord(recognized: string, expected: string): boolean {
     return normalized === normalizedExpected || normalized.includes(normalizedExpected)
   })
 }
+
+// --- Web Speech Synthesis ---
+
+let primed = false
+
+export function isSpeechSynthesisSupported(): boolean {
+  return (
+    typeof globalThis.speechSynthesis !== 'undefined' &&
+    typeof globalThis.SpeechSynthesisUtterance !== 'undefined'
+  )
+}
+
+export function primeSpeechSynthesis(): void {
+  if (primed) return
+  if (!isSpeechSynthesisSupported()) return
+  const u = new SpeechSynthesisUtterance('')
+  window.speechSynthesis.speak(u)
+  primed = true
+}
+
+export function speakEnglish(text: string): Promise<void> {
+  return speakInternal(text, 'en-US')
+}
+
+export function speakLocalized(text: string, lang: 'ru' | 'kk'): Promise<void> {
+  const locale = lang === 'ru' ? 'ru-RU' : 'kk-KZ'
+  return speakInternal(text, locale)
+}
+
+function speakInternal(text: string, lang: string): Promise<void> {
+  if (!isSpeechSynthesisSupported()) return Promise.resolve()
+  return new Promise((resolve) => {
+    const u = new SpeechSynthesisUtterance(text)
+    u.lang = lang
+    u.onend = () => resolve()
+    u.onerror = () => resolve()
+    window.speechSynthesis.speak(u)
+  })
+}
