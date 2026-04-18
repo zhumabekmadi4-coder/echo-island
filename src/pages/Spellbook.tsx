@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,8 @@ import { db } from '@/db/schema'
 import { WordCard, type WordStatus } from '@/components/WordCard'
 import { useSceneProgress } from '@/hooks/useSceneProgress'
 import { speakEnglish } from '@/engine/SpeechEngine'
+import { useEcho } from '@/hooks/useEcho'
+import echoLinesJson from '@/content/echo_lines.json'
 
 type Topic = 'magic_elements' | 'animals' | 'sky'
 
@@ -33,6 +35,24 @@ export function Spellbook() {
 
   const [activeTab, setActiveTab] = useState<Topic>('magic_elements')
   const [selected, setSelected] = useState<string | null>(null)
+
+  const echo = useEcho()
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      const flag = await db.appState.get('spellbook_intro_seen')
+      if (flag?.value === true || cancelled) return
+      echo.speak(echoLinesJson.spellbook_intro, { mood: 'talking', duration: 5000 })
+      await db.appState.put({
+        key: 'spellbook_intro_seen',
+        value: true,
+        updatedAt: new Date(),
+      })
+    })()
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const totalLearned = (wordProgress ?? []).filter((w) => w.learned).length
   const activeIsland = islands.find((i) => i.id === TOPICS.find((tp) => tp.id === activeTab)!.islandId)!

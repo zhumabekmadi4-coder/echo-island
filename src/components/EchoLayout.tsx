@@ -52,6 +52,25 @@ export function EchoLayout({ children }: { children: ReactNode }) {
     prevCountRef.current = curr
   }, [scenesCompleted])
 
+  // First-visit greeting
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      const flag = await db.appState.get('echo_first_greeting_seen')
+      if (flag?.value === true || cancelled) return
+      await new Promise((r) => setTimeout(r, 1500))
+      if (cancelled) return
+      await speak(echoLines.first_greeting, { mood: 'talking', duration: 7000 })
+      await db.appState.put({
+        key: 'echo_first_greeting_seen',
+        value: true,
+        updatedAt: new Date(),
+      })
+    })()
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const clearBubbleTimer = () => {
     if (bubbleTimerRef.current) {
       clearTimeout(bubbleTimerRef.current)
