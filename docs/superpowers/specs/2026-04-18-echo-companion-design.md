@@ -327,6 +327,8 @@ function getStatus(wordId: string, sceneId: string, wp?: WordProgress, sp?: Scen
   - 🎤 "Произнести" → one-card talk session; result feeds into SR
   - (If scene still accessible) "Вернуться на остров" → `navigate(/island/${islandId}/scene/${sceneId})`
 
+> **Implementation deviation (v1):** per-card mini-session deferred. "Послушать" (playback) and "Вернуться на остров" (navigate back to scene) remain. Practice is consolidated in `/talk`.
+
 ### 6.5 First-visit intro
 
 On first open of `/spellbook` (flag `spellbook_intro_seen` in `appState` table), Эхо speaks:
